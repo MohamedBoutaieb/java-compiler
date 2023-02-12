@@ -20,6 +20,7 @@ line .*\n
 %%
 [\n]  { yylineno;   printf(" \n"); }
 
+package                                       printf(" package ");
 class                                          printf(" class ");
 "public"                                       printf(" public ");
 "static"                                       printf(" static ");
