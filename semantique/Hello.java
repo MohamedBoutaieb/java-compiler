@@ -17,7 +17,7 @@ class Hello {
     public static void main(String args[]) {
 
 
-        int $j = 0;
+        int h-hh = 0;
         System.out.println("Hello World");
 
     }

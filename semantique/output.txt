@@ -1,15 +1,14 @@
- Identifier   Identifier  point_virgule  
+ package  point_virgule  
  
  commentaire_à_une_ligne 
-  commentaire_à_plusieurs_lignes  
- class   Identifier  { 
+  commentaire_à_plusieurs_lignes { 
  
-     public   static   void   main  parenthèse_ouvrante  String   Identifier [] parenthèse_fermante  { 
+ parenthèse_ouvrante  String  parenthèse_fermante { 
  
  
-         int   Identifier   affectation   Number  point_virgule  
-         afficher parenthèse_ouvrante  chaine_de_caractère  parenthèse_fermante  point_virgule  
+ affectation  point_virgule  
+ parenthèse_ouvrante  chaine_de_caractère  parenthèse_fermante  point_virgule  
  
-    } 
+} 
  
 }
