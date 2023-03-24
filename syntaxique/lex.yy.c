@@ -489,15 +489,14 @@ char *yytext;
 #define INITIAL 0
 #line 3 "java.lex"
  /* We usually need these... */	
- #include <stdio.h>	
- #include <stdlib.h>	
  		
  #include "java.tab.h"	                                                                         	
  /* Local stuff we need here... */	
-#include <math.h>	 			
-#line 14 "java.lex"
-int line_number = 1; 
-#line 501 "lex.yy.c"
+  
+    		
+#line 13 "java.lex"
+int line_number = 1;
+#line 500 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -648,9 +647,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 31 "java.lex"
+#line 30 "java.lex"
 
-#line 654 "lex.yy.c"
+#line 653 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -743,200 +742,200 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 32 "java.lex"
+#line 31 "java.lex"
 { yylineno;   printf(" \n"); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 34 "java.lex"
+#line 33 "java.lex"
 {return Package;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 35 "java.lex"
+#line 34 "java.lex"
 {return Class;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 36 "java.lex"
-{return Public;}
+#line 35 "java.lex"
+{printf("__public__"); return Public;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 37 "java.lex"
-{return Static;}
+#line 36 "java.lex"
+{printf("__static__"); return Static;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 38 "java.lex"
-{return Void;}
+#line 37 "java.lex"
+{printf("__void__"); return Void;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 39 "java.lex"
+#line 38 "java.lex"
 {printf(" private "); return Private;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 40 "java.lex"
-{printf(" main "); return Main;}
+#line 39 "java.lex"
+{printf(" main "); return MainProg;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 41 "java.lex"
+#line 40 "java.lex"
 {printf(" return "); return Return;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 42 "java.lex"
+#line 41 "java.lex"
 {printf(" int "); return Int;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 43 "java.lex"
+#line 42 "java.lex"
 {printf(" boolean "); return Bool;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 44 "java.lex"
+#line 43 "java.lex"
 {printf(" String "); return String;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 45 "java.lex"
+#line 44 "java.lex"
 {printf(" if "); return If;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 46 "java.lex"
+#line 45 "java.lex"
 {printf(" else "); return Else;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 47 "java.lex"
+#line 46 "java.lex"
 {printf(" while "); return While;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 48 "java.lex"
+#line 47 "java.lex"
 {printf(" afficher"); return Print;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 49 "java.lex"
+#line 48 "java.lex"
 {printf(" for "); return For;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 50 "java.lex"
+#line 49 "java.lex"
 {printf(" affectation "); return Affectation;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 51 "java.lex"
+#line 50 "java.lex"
 {printf(" addition "); return Addition;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 52 "java.lex"
+#line 51 "java.lex"
 {printf(" soustraction "); return Soustraction;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 53 "java.lex"
+#line 52 "java.lex"
 {printf(" multiplication "); return Multiplication;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 54 "java.lex"
+#line 53 "java.lex"
 {printf(" division "); return Division;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 55 "java.lex"
+#line 54 "java.lex"
 {printf(" et "); return Et;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 56 "java.lex"
+#line 55 "java.lex"
 {printf(" ou "); return Ou;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 57 "java.lex"
+#line 56 "java.lex"
 {printf(" non "); return Non;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 58 "java.lex"
+#line 57 "java.lex"
 {printf(" egal "); return Egal;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 59 "java.lex"
+#line 58 "java.lex"
 {printf(" different "); return Different;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 60 "java.lex"
+#line 59 "java.lex"
 {printf(" inferieur "); return Inferieur;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 61 "java.lex"
+#line 60 "java.lex"
 {printf(" inferieur_egal "); return Inferieur_egal;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 62 "java.lex"
+#line 61 "java.lex"
 {printf(" point_virgule "); return Point_virgule;}                   
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 63 "java.lex"
+#line 62 "java.lex"
 {printf(" commentaire_ligne "); return Commentaire_ligne;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 64 "java.lex"
+#line 63 "java.lex"
 {printf(" chaine_caractere "); return Chaine_caractere;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 65 "java.lex"
+#line 64 "java.lex"
 {printf(" commentaire_bloc "); return Commentaire_bloc;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 66 "java.lex"
+#line 65 "java.lex"
 {printf(" parenthèse_ouvrante "); return Parenthese_ouvrante;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 67 "java.lex"
+#line 66 "java.lex"
 {printf(" parenthèse_fermante "); return Parenthese_fermante;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 68 "java.lex"
+#line 67 "java.lex"
 {printf(" Identifiant "); return Identifiant;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 69 "java.lex"
+#line 68 "java.lex"
 {printf(" Nombre "); return Nombre;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 70 "java.lex"
+#line 69 "java.lex"
 {fprintf(stderr,"illegal identifier \'%s\' on line :%d\n",yytext,yylineno);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 71 "java.lex"
+#line 70 "java.lex"
 ECHO;
 	YY_BREAK
-#line 940 "lex.yy.c"
+#line 939 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1820,7 +1819,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 71 "java.lex"
+#line 70 "java.lex"
 
 
 int main(int argc, char *argv[]) 
@@ -1828,6 +1827,7 @@ int main(int argc, char *argv[])
     yylineno = 1;
      yyin = fopen(argv[1], "r");
      yylex();
+     
      fclose(yyin);
 }
 

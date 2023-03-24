@@ -1,17 +1,16 @@
 
 %{	
  /* We usually need these... */	
- #include <stdio.h>	
- #include <stdlib.h>	
  		
  #include "java.tab.h"	                                                                         	
  /* Local stuff we need here... */	
-#include <math.h>	 			
+  
+    		
 %}
 
 
 %{
-int line_number = 1; 
+int line_number = 1;
 %}
 %option yylineno
 
@@ -33,20 +32,22 @@ line .*\n
 
 "package"                                       {return Package;}
 "class"                                         {return Class;}
-"public"                                      {return Public;}
-"static"                                      {return Static;}
-"void"                                        {return Void;}
+"public"                                      {printf("__public__"); return Public;}
+"static"                                      {printf("__static__"); return Static;}
+"void"                                        {printf("__void__"); return Void;}
 "private"                                     {printf(" private "); return Private;}
-"main"                                        {printf(" main "); return Main;}
+"main"                                        {printf(" main "); return MainProg;}
 "return"                                      {printf(" return "); return Return;}
 "int"                                         {printf(" int "); return Int;}
 "boolean"                                     {printf(" boolean "); return Bool;}
+"char"                                        {printf(" char "); return Char;}
 String                                        {printf(" String "); return String;}
-"if"                                          {printf(" if "); return If;}
-"else"                                        {printf(" else "); return Else;}
-"while"                                       {printf(" while "); return While;}
-"System.out.println"                          {printf(" afficher"); return Print;}
+"if"                                          {printf(" _if "); return If;}
+"else"                                        {printf(" _else "); return Else;}
+"while"                                       {printf(" _while "); return While;}
+"System.out.println"                          {printf(" _afficher"); return Print;}
 "for"                                         {printf(" for "); return For;}
+"extends"                                     {printf(" extends "); return Extends;}
 "="	                                          {printf(" affectation "); return Affectation;}
 "+"	                                          {printf(" addition "); return Addition;}
 "-"	                                          {printf(" soustraction "); return Soustraction;}
@@ -68,6 +69,8 @@ String                                        {printf(" String "); return String
 {id}                                           {printf(" Identifiant "); return Identifiant;}
 {nb}                                           {printf(" Nombre "); return Nombre;}
 {iderrone}              {fprintf(stderr,"illegal identifier \'%s\' on line :%d\n",yytext,yylineno);}
+"{"                                            {printf(" accolade_ouvrante "); return Accolade_ouvrante;}
+"}"                                            {printf(" accolade_fermante "); return Accolade_fermante;}
 %%
 
 int main(int argc, char *argv[]) 
@@ -75,6 +78,7 @@ int main(int argc, char *argv[])
     yylineno = 1;
      yyin = fopen(argv[1], "r");
      yylex();
+     
      fclose(yyin);
 }
 
