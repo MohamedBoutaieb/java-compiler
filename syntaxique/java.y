@@ -112,11 +112,14 @@ ClassDeclaration   : ClassScope ClassExtension Accolade_ouvrante VarDeclaration 
                             insert_code("SORTIE",-1,"","CLASS");
                             insert_code("RETOUR",retour+1,"","");
                         }
-                     ClassDecralation
+                    |ClassDecralationList
                     | error ClassExtension Accolade_ouvrante VarDeclaration MethodDeclaration Accolade_fermante 
                     | ClassScope ClassExtension error VarDeclaration MethodDeclaration Accolade_fermante { yyerror ("missing opening"); YYABORT} 
                     | ClassScope ClassExtension Accolade_ouvrante VarDeclaration MethodDeclaration error { yyerror ("missing closing brackets"); YYABORT} 
                     ; 
+ClassDeclarationList : ClassDeclaration ClassDeclarationList
+                    | ClassDeclaration
+                    ;
 VarDeclaration : Type Identifiant {
                             if(isParam)
                                 set_param($2,$1);
@@ -132,8 +135,39 @@ VarDeclaration : Type Identifiant {
 Type : Int { $1 = "int";}
     | Bool { $1 = "bool";}
     | String { $1 = "string";}
-    | 
+    | Identifier { $1 = "identifier";}
     ;
+Statement : If Parenthese_ouvrante Expression Parenthese_fermante Statement Else Statement |
+            While Parenthese_ouvrante Expression Parenthese_fermante Statement |
+            Print Parenthese_ouvrante Expression Parenthese_fermante Point_virgule |
+            Accolade_ouvrante StatementList Accolade_fermante |
+            Identifier Affectation Expression Point_virgule |
+            Identifier "[" Expression "]" Affectation Expression Point_virgule |
+            ;
+StatementList : Statement StatementList | Statement
+                ;
+Expression : Expression Operateur Expression |
+            Expression"[" Expression "]" |
+            Expression "." Length |
+            Expression "." Identifier Parenthese_ouvrante Expression ExpressionList Parenthese_fermante |
+ExpressionList : Expression | Expression "," ExpressionList |Bool | Int | "this"|"new" "int" "[" Expression "]"|"new" Identifier Parenthese_ouvrante Parenthese_fermante
+                 |"!" Expression |"(" Expression ")"|Identifier
+                ;
+MethodDeclaration : Public Type Identifiant Parenthese_ouvrante MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante {
+                            insert_code("SORTIE",-1,"","METHOD");
+                            insert_code("RETOUR",retour+1,"","");
+                        }
+                | error Type Identifiant Parenthese_ouvrante MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante { yyerror ("missing public"); YYABORT}
+                | Public error Identifiant Parenthese_ouvrante MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante { yyerror ("missing return type"); YYABORT}
+                | Public Type error Parenthese_ouvrante MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante { yyerror ("missing method name"); YYABORT}
+                | Public Type Identifiant error MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante { yyerror ("missing opening parentheses"); YYABORT}
+                | Public Type Identifiant Parenthese_ouvrante MethodParam error Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante { yyerror ("missing closing parentheses"); YYABORT}
+                | Public Type Identifiant Parenthese_ouvrante MethodParam Parenthese_fermante error VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante { yyerror ("missing opening brackets"); YYABORT}
+                | Public Type Identifiant Parenthese_ouvrante MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule error { yyerror ("missing closing brackets"); YYABORT}
+                ;
+VerDeclarationList : VarDeclaration VarDeclarationList | VarDeclaration
+                    ;
+
 %% 
 
 int yyerror(char const *msg) {
