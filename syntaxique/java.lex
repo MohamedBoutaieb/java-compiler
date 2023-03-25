@@ -73,14 +73,7 @@ String                                        {printf(" String "); return String
 "}"                                            {printf(" accolade_fermante "); return Accolade_fermante;}
 %%
 
-int main(int argc, char *argv[]) 
-{   
-    yylineno = 1;
-     yyin = fopen(argv[1], "r");
-     yylex();
-     
-     fclose(yyin);
-}
+
 
 int yywrap()
 {
