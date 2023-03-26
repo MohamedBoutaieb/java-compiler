@@ -76,13 +76,22 @@
 %token Accolade_ouvrante
 %token Accolade_fermante
 %token Extends
+%token Crochet_ouvrante
+%token Crochet_fermante
+%token length
+%token Pt
+%token This
+%token Puissance
+%token New
+%token Not
+%token Virgule
 //%error-verbose
 %start program
 
 %% 
 program : MainClass ClassDeclaration    
 
-MainClass            : ClassScope Accolade_ouvrante Public Static Void MainProg Parenthese_ouvrante MainMethodParam Parenthese_fermante Accolade_ouvrante Statement Accolade_fermante Accolade_fermante   
+MainClass            : ClassScope Accolade_ouvrante Public Static Void MainProg Parenthese_ouvrante String Identifiant Crochet_ouvrante Crochet_fermante Parenthese_fermante Accolade_ouvrante StatementList Accolade_fermante Accolade_fermante   
                         | ClassScope error Public Static Void MainProg Parenthese_ouvrante MainMethodParam Parenthese_fermante Accolade_ouvrante Statement Accolade_fermante Accolade_fermante { yyerror ("expected `{` after class declaration "); YYABORT}
                         | ClassScope Accolade_ouvrante error Static Void MainProg Parenthese_ouvrante MainMethodParam Parenthese_fermante Accolade_ouvrante Statement Accolade_fermante Accolade_fermante { yyerror ("main function must be public "); YYABORT}
                         | ClassScope Accolade_ouvrante Public error Void MainProg Parenthese_ouvrante MainMethodParam Parenthese_fermante Accolade_ouvrante Statement Accolade_fermante Accolade_fermante { yyerror ("main function must be static "); YYABORT}
@@ -112,6 +121,13 @@ ClassDeclaration   : ClassScope ClassExtension Accolade_ouvrante VarDeclaration 
                             // insert_code("SORTIE",-1,"","CLASS");
                             // insert_code("RETOUR",retour+1,"","");
                         }
+                    |  ClassScope Accolade_ouvrante VarDeclaration MethodDeclaration Accolade_fermante   {
+                            // insert_code("SORTIE",-1,"","CLASS");
+                            // insert_code("RETOUR",retour+1,"","");
+                        }
+                    | ClassScope ClassExtension Accolade_ouvrante MethodDeclaration Accolade_fermante
+                    | ClassScope ClassExtension Accolade_ouvrante VarDeclaration Accolade_fermante
+                    | ClassScope ClassExtension Accolade_ouvrante Accolade_fermante
                     |ClassDeclarationList
                     | error ClassExtension Accolade_ouvrante VarDeclaration MethodDeclaration Accolade_fermante 
                     | ClassScope ClassExtension error VarDeclaration MethodDeclaration Accolade_fermante { yyerror ("missing opening"); YYABORT} 
@@ -130,26 +146,27 @@ VarDeclaration : Type Identifiant {
                         }
                 | error Identifiant   { yyerror (" Valid Type is needed  "); YYABORT}
                 | Type  error   { yyerror ("Identifier is needed  "); YYABORT}
-Type : Int { $1 = "int";}
+Type : Int { $1 = Int;}
     | Bool { $1 = "bool";}
     | String { $1 = "string";}
     | Identifiant { $1 = "identifier";}
+    | Char  { $1 = "char";}
     ;
 Statement : If Parenthese_ouvrante Expression Parenthese_fermante Statement Else Statement |
             While Parenthese_ouvrante Expression Parenthese_fermante Statement |
             Print Parenthese_ouvrante Expression Parenthese_fermante Point_virgule |
             Accolade_ouvrante StatementList Accolade_fermante |
             Identifiant Affectation Expression Point_virgule |
-            Identifiant "[" Expression "]" Affectation Expression Point_virgule |
+            Identifiant Crochet_ouvrante Expression Crochet_fermante Affectation Expression Point_virgule |
             ;
 StatementList : Statement StatementList | Statement
                 ;
 Expression : Expression Operateur Expression |
-            Expression"[" Expression "]" |
-            Expression "." "length"|
-            Expression "." Identifiant Parenthese_ouvrante Expression ExpressionList Parenthese_fermante |
-ExpressionList : Expression | Expression "," ExpressionList |Bool | Int | "this"|"new" "int" "[" Expression "]"|"new" Identifiant Parenthese_ouvrante Parenthese_fermante
-                 |"!" Expression |"(" Expression ")"|Identifiant
+            Expression Crochet_ouvrante Expression Crochet_fermante |
+            Expression Pt length|
+            Expression Pt Identifiant Parenthese_ouvrante Expression ExpressionList Parenthese_fermante | Nombre | Chaine_caractere | Char | Identifiant
+ExpressionList : Expression | Expression Virgule ExpressionList |Bool | Int | This|New Int Crochet_ouvrante Expression Crochet_fermante|New Identifiant Parenthese_ouvrante Parenthese_fermante
+                 |Not Expression |Parenthese_ouvrante Expression Parenthese_fermante |Identifiant | Nombre
                 ;
 MethodDeclaration : Public Type Identifiant Parenthese_ouvrante MethodParam Parenthese_fermante Accolade_ouvrante VarDeclarationList StatementList Return Expression Point_virgule Accolade_fermante {
                             // insert_code("SORTIE",-1,"","METHOD");
@@ -165,20 +182,20 @@ MethodDeclaration : Public Type Identifiant Parenthese_ouvrante MethodParam Pare
                 ;
 VarDeclarationList : VarDeclaration VarDeclarationList | VarDeclaration
                    ;
-MainMethodParam : String "[" "]" Identifiant {
+MainMethodParam : String Crochet_ouvrante Crochet_fermante Identifiant {
                             // set_param($4,$1);
                         }
-                | String "[" "]" Identifiant "," MainMethodParam
+                | String  Identifiant Crochet_ouvrante Crochet_fermante
                 | error Identifiant { yyerror (" Valid Type is needed  "); YYABORT}
                 | String  error { yyerror ("Identifier is needed  "); YYABORT}
                 ;
-Operateur : "+"| "-"| "*"| "/"| "<"| "&&"| "=="| "!="| "||"
+Operateur : Addition | Soustraction | Multiplication | Division | Inferieur | Inferieur_egal | Egal | Different | Ou | Et | Non | Puissance
             ;
 
 MethodParam : Type Identifiant {
                             // set_param($2,$1);
                         }
-            | Type Identifiant "," MethodParam
+            | Type Identifiant Virgule MethodParam
             | error Identifiant { yyerror (" Valid Type is needed  "); YYABORT}
             | Type  error { yyerror ("Identifier is needed  "); YYABORT}
             ;

@@ -31,7 +31,7 @@ line .*\n
 [\n]  { yylineno;   printf(" \n"); }
 
 "package"                                       {return Package;}
-"class"                                         {return Class;}
+"class"                                         {printf("__class__"); return Class;}
 "public"                                      {printf("__public__"); return Public;}
 "static"                                      {printf("__static__"); return Static;}
 "void"                                        {printf("__void__"); return Void;}
@@ -60,7 +60,15 @@ String                                        {printf(" String "); return String
 "!="	                                       {printf(" different "); return Different;}
 "<"	                                           {printf(" inferieur "); return Inferieur;}
 "<="	                                       {printf(" inferieur_egal "); return Inferieur_egal;}
-";"                                            {printf(" point_virgule "); return Point_virgule;}                   
+";"                                            {printf(" point_virgule "); return Point_virgule;}         
+"["                                    {printf(" crochet_ouvrante "); return  Crochet_ouvrante;}
+"]"                                    {printf(" crochet_fermante "); return Crochet_fermante;}
+"."												{printf(" point "); return Pt;}
+","												{printf(" virgule "); return Virgule;}
+"new"											{printf(" new "); return New;}
+"^"												{printf(" puissance "); return Puissance;}
+"this"											{printf(" this "); return This;}
+"length"										{printf(" length "); return length;}
 {comment_line}                                 {printf(" commentaire_ligne "); return Commentaire_ligne;}
 {chaine_char}                                  {printf(" chaine_caractere "); return Chaine_caractere;}
 {multi_line_comment}                           {printf(" commentaire_bloc "); return Commentaire_bloc;}

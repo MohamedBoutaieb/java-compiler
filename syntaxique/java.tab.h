@@ -78,7 +78,16 @@
      Print = 294,
      Accolade_ouvrante = 295,
      Accolade_fermante = 296,
-     Extends = 297
+     Extends = 297,
+     Crochet_ouvrante = 298,
+     Crochet_fermante = 299,
+     length = 300,
+     Pt = 301,
+     This = 302,
+     Puissance = 303,
+     New = 304,
+     Not = 305,
+     Virgule = 306
    };
 #endif
 
