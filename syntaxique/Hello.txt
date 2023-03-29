@@ -1,5 +1,52 @@
 class Hello {
     public static void main(String args[]){
-        hhh = 0;        System.out.println("Hello World");
+        hhh = 0;   
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");System.out.println("haga");
+     System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+
+System.out.println("haga");
+
+System.out.println("haga");
+
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
+System.out.println("haga");
 
     }}
