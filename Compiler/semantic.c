@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "semantique.h"
+#include "semantic.h"
 
 // #define SYMBOL_TABLE_LENGTH 300
 

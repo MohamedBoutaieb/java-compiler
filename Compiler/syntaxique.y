@@ -5,8 +5,8 @@
     #include <string.h>
     #include <stdlib.h>
     #include <stdbool.h>
-    #include "symtab.h"
-    #include "codeGenerator.h"
+    #include "semantic.h"
+    #include "CodeGenerator.h"
 
     #define YYSTYPE char*
 
@@ -77,7 +77,7 @@
 %token  _BOOLVALUE
 %token  _INTEGERVALUE
 %token  _IDENT
-
+%token _ChainChar
 
 %start program
 
@@ -299,7 +299,7 @@ Statement            : _OPENBRAC Statement Statement _CLOSEBRAC
                         | _IDENT _OPENSQRBRACK Expression error _EQUAL Expression _SEMICOLON  Statement               { yyerror (" Close brackets is needed  "); YYABORT}
                         | _IDENT _OPENSQRBRACK Expression _CLOSESQRBRACK error Expression _SEMICOLON  Statement       { yyerror (" Equal operator is needed  "); YYABORT}
                         | _IDENT _OPENSQRBRACK Expression _CLOSESQRBRACK _EQUAL Expression error  Statement           { yyerror (" Semi colon is needed  "); YYABORT}
-                        |
+                        | _ChainChar
                         ;
 
 SectionC_E           : _COMMA Expression SectionC_E

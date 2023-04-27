@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Symtab.h"
+#include "semantic.h"
 #include "codeGenerator.h"
 
 #define TAB_COD_INT_LENGTH 300
